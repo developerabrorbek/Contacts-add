@@ -12,12 +12,12 @@ function Hero(props) {
     
     const newContact = {
         id: Date.now(),
-        username : username,
+        username : username.toLocaleUpperCase(),
         number : number,
         addedTime : date.toDateString()
     }
 
-    setContact([...contacts, newContact]);
+    if(newContact.username != "" || newContact.number != "") setContact([...contacts, newContact]);
 
     setNumber("");
     setUsername("");
@@ -35,20 +35,21 @@ function Hero(props) {
             <input
               type="text"
               placeholder="Enter your name"
-              className="form-control p-3 fs-4"
+              className="form-control p-2 fs-5"
               value={username}
               onInput={(e)=>setUsername(e.target.value)}
             />
             <input
               type="number"
-              placeholder="Enter your number"
-              className="form-control p-3 fs-4"
+              placeholder="Enter your number (+998 ...)"
+              className="form-control p-2 fs-5"
               value={number}
               onInput={(e)=>setNumber(e.target.value)}
             />
-            <button className="btn btn-primary" type="submit">Add contact</button>
+            <button className="btn btn-primary  fs-4" type="submit">Add contact</button>
           </form>
           <div className="body mt-5 shadow p-5">
+            <h2 className="text-center mb-4 text-uppercase text-danger">Your contacts</h2>
           <table className="table table-hover">
             <thead>
               <tr>
@@ -66,7 +67,7 @@ function Hero(props) {
                         return (<tr>
                             <td>{index +1}</td>
                         <td>{item.username}</td>
-                        <td>{item.number}</td>
+                        <td>+998{item.number}</td>
                         <td>{item.addedTime}</td>
                         <td><button className="btn btn-warning">EDIT</button></td>
                         <td><button className="btn btn-danger">DELETE</button></td>
